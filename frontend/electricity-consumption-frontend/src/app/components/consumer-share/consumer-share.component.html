@@ -1,0 +1,25 @@
+<div class="chart-wrapper">
+  <div class="chart-header">
+    <h3>Consumer Share by Class</h3>
+    <p class="chart-subtitle">{{analysisType}} Analysis</p>
+  </div>
+  
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading consumer share data...</p>
+  </div>
+  
+  <div *ngIf="error" class="error-state">
+    <p>{{error}}</p>
+    <button (click)="loadData()" class="retry-btn">Retry</button>
+  </div>
+  
+  <div *ngIf="!loading && !error" class="chart-container">
+    <canvas 
+      baseChart
+      [data]="pieChartData"
+      [options]="pieChartOptions"
+      [type]="pieChartType">
+    </canvas>
+  </div>
+</div>

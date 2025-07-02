@@ -1,0 +1,90 @@
+<div class="dashboard-container">
+  <!-- Header Section -->
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Electricity Consumption Dashboard</h1>
+    <p class="dashboard-subtitle">Comprehensive Analysis of Electricity Sales, Consumer Growth, and Revenue Trends</p>
+  </div>
+
+  <!-- Parameter Controls Section -->
+  <div class="parameters-section" *ngIf="parameters">
+    <div class="parameter-card">
+      <h3>Dashboard Parameters</h3>
+      <div class="parameter-controls">
+        <div class="parameter-group">
+          <label for="consumptionType">Consumption Type:</label>
+          <select 
+            id="consumptionType"
+            [(ngModel)]="selectedConsumptionType" 
+            (change)="onParameterChange()"
+            class="parameter-select">
+            <option *ngFor="let type of parameters.consumptionTypes" [value]="type">{{type}}</option>
+          </select>
+        </div>
+        
+        <div class="parameter-group">
+          <label for="analysisType">Analysis Type:</label>
+          <select 
+            id="analysisType"
+            [(ngModel)]="selectedAnalysisType" 
+            (change)="onParameterChange()"
+            class="parameter-select">
+            <option *ngFor="let type of parameters.analysisTypes" [value]="type">{{type}}</option>
+          </select>
+        </div>
+        
+        <div class="parameter-group">
+          <label for="viewMode">View Mode:</label>
+          <select 
+            id="viewMode"
+            [(ngModel)]="selectedViewMode" 
+            (change)="onParameterChange()"
+            class="parameter-select">
+            <option *ngFor="let mode of parameters.viewModes" [value]="mode">{{mode}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading dashboard data...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-container">
+    <p class="error-message">{{error}}</p>
+    <button (click)="loadParameters()" class="retry-button">Retry</button>
+  </div>
+
+  <!-- Charts Grid Section -->
+  <div class="charts-grid" *ngIf="!loading && !error && parameters">
+    <div class="chart-row">
+      <div class="chart-container">
+        <app-consumer-growth 
+          [analysisType]="selectedAnalysisType" 
+          [viewMode]="selectedViewMode">
+        </app-consumer-growth>
+      </div>
+      <div class="chart-container">
+        <app-consumer-share 
+          [analysisType]="selectedAnalysisType">
+        </app-consumer-share>
+      </div>
+    </div>
+    
+    <div class="chart-row">
+      <div class="chart-container">
+        <app-power-sales-growth 
+          [consumptionType]="selectedConsumptionType" 
+          [viewMode]="selectedViewMode">
+        </app-power-sales-growth>
+      </div>
+      <div class="chart-container">
+        <app-revenue-growth>
+        </app-revenue-growth>
+      </div>
+    </div>
+  </div>
+</div>

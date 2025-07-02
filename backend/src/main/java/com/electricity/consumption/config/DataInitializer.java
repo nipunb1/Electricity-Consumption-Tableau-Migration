@@ -1,0 +1,66 @@
+package com.electricity.consumption.config;
+
+import com.electricity.consumption.entity.ElectricityConsumption;
+import com.electricity.consumption.repository.ElectricityConsumptionRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.List;
+
+@Component
+@Slf4j
+public class DataInitializer implements CommandLineRunner {
+    
+    @Autowired
+    private ElectricityConsumptionRepository repository;
+    
+    @Override
+    public void run(String... args) throws Exception {
+        if (repository.count() == 0) {
+            log.info("Initializing sample data...");
+            loadSampleData();
+            log.info("Sample data loaded successfully. Total records: {}", repository.count());
+        } else {
+            log.info("Sample data already exists. Total records: {}", repository.count());
+        }
+    }
+    
+    private void loadSampleData() {
+        List<ElectricityConsumption> sampleData = Arrays.asList(
+            new ElectricityConsumption(null, "Connection Category", "Mumbai", "Maharashtra", "Residential", 2018, 15000, 2500000, 1200.5, 8.0),
+            new ElectricityConsumption(null, "Connection Category", "Mumbai", "Maharashtra", "Commercial", 2018, 8000, 150000, 800.3, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Mumbai", "Maharashtra", "Industrial", 2018, 25000, 5000, 2500.7, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Mumbai", "Maharashtra", "Residential", 2019, 16500, 2600000, 1320.6, 8.0),
+            new ElectricityConsumption(null, "Connection Category", "Mumbai", "Maharashtra", "Commercial", 2019, 8800, 155000, 880.3, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Mumbai", "Maharashtra", "Industrial", 2019, 27500, 5200, 2750.8, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Mumbai", "Maharashtra", "Residential", 2020, 18000, 2700000, 1440.7, 8.0),
+            new ElectricityConsumption(null, "Connection Category", "Mumbai", "Maharashtra", "Commercial", 2020, 9600, 160000, 960.4, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Mumbai", "Maharashtra", "Industrial", 2020, 30000, 5400, 3000.9, 10.0),
+            
+            new ElectricityConsumption(null, "Connection Category", "Chennai", "Tamil Nadu", "Residential", 2018, 12000, 2000000, 960.4, 8.0),
+            new ElectricityConsumption(null, "Connection Category", "Chennai", "Tamil Nadu", "Commercial", 2018, 6400, 120000, 640.2, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Chennai", "Tamil Nadu", "Industrial", 2018, 20000, 4000, 2000.5, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Chennai", "Tamil Nadu", "Residential", 2019, 13200, 2100000, 1056.4, 8.0),
+            new ElectricityConsumption(null, "Connection Category", "Chennai", "Tamil Nadu", "Commercial", 2019, 7040, 125000, 704.3, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Chennai", "Tamil Nadu", "Industrial", 2019, 22000, 4200, 2200.6, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Chennai", "Tamil Nadu", "Residential", 2020, 14400, 2200000, 1152.5, 8.0),
+            new ElectricityConsumption(null, "Connection Category", "Chennai", "Tamil Nadu", "Commercial", 2020, 7680, 130000, 768.3, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Chennai", "Tamil Nadu", "Industrial", 2020, 24000, 4400, 2400.7, 10.0),
+            
+            new ElectricityConsumption(null, "Connection Category", "Hyderabad", "Andhra Pradesh", "Residential", 2018, 10000, 1800000, 800.3, 8.0),
+            new ElectricityConsumption(null, "Connection Category", "Hyderabad", "Andhra Pradesh", "Commercial", 2018, 5600, 100000, 560.2, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Hyderabad", "Andhra Pradesh", "Industrial", 2018, 18000, 3500, 1800.4, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Hyderabad", "Andhra Pradesh", "Residential", 2019, 11000, 1900000, 880.4, 8.0),
+            new ElectricityConsumption(null, "Connection Category", "Hyderabad", "Andhra Pradesh", "Commercial", 2019, 6160, 105000, 616.2, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Hyderabad", "Andhra Pradesh", "Industrial", 2019, 19800, 3700, 1980.5, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Hyderabad", "Andhra Pradesh", "Residential", 2020, 12000, 2000000, 960.4, 8.0),
+            new ElectricityConsumption(null, "Connection Category", "Hyderabad", "Andhra Pradesh", "Commercial", 2020, 6720, 110000, 672.3, 10.0),
+            new ElectricityConsumption(null, "Connection Category", "Hyderabad", "Andhra Pradesh", "Industrial", 2020, 21600, 3900, 2160.6, 10.0)
+        );
+        
+        repository.saveAll(sampleData);
+    }
+}

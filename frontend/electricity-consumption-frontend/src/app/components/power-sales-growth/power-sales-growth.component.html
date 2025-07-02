@@ -1,0 +1,25 @@
+<div class="chart-wrapper">
+  <div class="chart-header">
+    <h3>Power Sales Growth</h3>
+    <p class="chart-subtitle">{{consumptionType}} - {{viewMode}} View</p>
+  </div>
+  
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading power sales growth data...</p>
+  </div>
+  
+  <div *ngIf="error" class="error-state">
+    <p>{{error}}</p>
+    <button (click)="loadData()" class="retry-btn">Retry</button>
+  </div>
+  
+  <div *ngIf="!loading && !error" class="chart-container">
+    <canvas 
+      baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [type]="barChartType">
+    </canvas>
+  </div>
+</div>

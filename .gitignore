@@ -1,0 +1,26 @@
+# Backend
+backend/target/
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+backend/*.log
+backend/.env
+
+# Frontend
+frontend/electricity-consumption-frontend/node_modules/
+frontend/electricity-consumption-frontend/dist/
+frontend/electricity-consumption-frontend/.angular/
+frontend/electricity-consumption-frontend/*.log
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
