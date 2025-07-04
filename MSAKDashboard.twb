@@ -1,12 +1,19 @@
 <?xml version="1.0" ?>
-<workbook xmlns:user="http://www.tableausoftware.com/xml/user" version="18.1">
+<workbook xmlns:user="http://www.tableausoftware.com/xml/user" source-build="20231.23.0213.1530" source-platform="win" version="18.1">
+  <document-format-change-manifest>
+    <IntuitiveSorting UAC="false"/>
+    <IntuitiveSorting_SP2 UAC="false"/>
+    <SheetIdentifierTracking UAC="false"/>
+    <WindowsPersistSimpleIdentifiers UAC="false"/>
+  </document-format-change-manifest>
   <preferences/>
   <datasources>
     <datasource caption="ICG_2025" inline="true" name="federated.0123456789abcdef" version="18.1">
       <connection class="excel-direct" cleaning="no" compat="no" dataRefreshTime="" filename="/home/ubuntu/ICG_2025.xlsx" interpretationMode="0" password="" server="" validate="no">
         <relation connection="excel-direct" name="Data" table="[Data$]" type="table"/>
       </connection>
-      <column caption="Date" datatype="date" name="[Date]" role="measure" type="quantitative"/>
+      <aliases enabled="yes"/>
+      <column caption="Date" datatype="date" name="[Date]" role="dimension" type="ordinal"/>
       <column caption="Region" datatype="string" name="[Region]" role="dimension" type="nominal"/>
       <column caption="Product_Category" datatype="string" name="[Product_Category]" role="dimension" type="nominal"/>
       <column caption="Sales_Channel" datatype="string" name="[Sales_Channel]" role="dimension" type="nominal"/>
@@ -17,13 +24,17 @@
       <column caption="Customer_ID" datatype="string" name="[Customer_ID]" role="dimension" type="nominal"/>
       <column caption="Product_ID" datatype="string" name="[Product_ID]" role="dimension" type="nominal"/>
       <column caption="Sales_Rep" datatype="string" name="[Sales_Rep]" role="dimension" type="nominal"/>
-      <column caption="Quarter" datatype="string" name="[Quarter]" role="dimension" type="nominal"/>
-      <column caption="Year" datatype="integer" name="[Year]" role="measure" type="quantitative"/>
+      <column caption="Quarter" datatype="string" name="[Quarter]" role="dimension" type="ordinal"/>
+      <column caption="Year" datatype="integer" name="[Year]" role="dimension" type="ordinal"/>
       <column caption="Discount_Percent" datatype="real" name="[Discount_Percent]" role="measure" type="quantitative"/>
       <column caption="Profit_Margin" datatype="real" name="[Profit_Margin]" role="measure" type="quantitative"/>
       <column caption="Profit" datatype="real" name="[Profit]" role="measure" type="quantitative"/>
       <column caption="Unit_Price" datatype="real" name="[Unit_Price]" role="measure" type="quantitative"/>
       <column caption="Discounted_Revenue" datatype="real" name="[Discounted_Revenue]" role="measure" type="quantitative"/>
+      <layout dim-ordering="alphabetic" dim-percentage="0.5" measure-ordering="alphabetic" measure-percentage="0.4" show-structure="true"/>
+      <semantic-values>
+        <semantic-value key="[Country].[Name]" value="&amp;quot;United States&amp;quot;"/>
+      </semantic-values>
     </datasource>
   </datasources>
   <worksheets>
@@ -36,8 +47,21 @@
           <datasource-dependencies datasource="federated.0123456789abcdef">
             <column caption="Region" datatype="string" name="[Region]" role="dimension" type="nominal"/>
             <column caption="Revenue" datatype="real" name="[Revenue]" role="measure" type="quantitative"/>
+            <column-instance column="[Region]" derivation="None" name="[none:Region:nk]" pivot="key" type="nominal"/>
+            <column-instance column="[Revenue]" derivation="Sum" name="[sum:Revenue:qk]" pivot="key" type="quantitative"/>
           </datasource-dependencies>
+          <filter class="categorical" column="[federated.0123456789abcdef].[none:Region:nk]"/>
+          <sort class="manual" column="[federated.0123456789abcdef].[none:Region:nk]" direction="ASC"/>
+          <perspectives/>
+          <slices/>
           <aggregation value="true"/>
+          <style/>
+          <panes>
+            <pane selection-relaxation-option="selection-relaxation-allow"/>
+          </panes>
+          <mark-layout/>
+          <rows/>
+          <cols/>
         </view>
       </table>
     </worksheet>
@@ -50,7 +74,21 @@
           <datasource-dependencies datasource="federated.0123456789abcdef">
             <column caption="Date" datatype="date" name="[Date]" role="dimension" type="ordinal"/>
             <column caption="Revenue" datatype="real" name="[Revenue]" role="measure" type="quantitative"/>
+            <column-instance column="[Date]" derivation="None" name="[none:Date:ok]" pivot="key" type="ordinal"/>
+            <column-instance column="[Revenue]" derivation="Sum" name="[sum:Revenue:qk]" pivot="key" type="quantitative"/>
           </datasource-dependencies>
+          <filter class="quantitative" column="[federated.0123456789abcdef].[sum:Revenue:qk]"/>
+          <sort class="manual" column="[federated.0123456789abcdef].[none:Date:ok]" direction="ASC"/>
+          <perspectives/>
+          <slices/>
+          <aggregation value="true"/>
+          <style/>
+          <panes>
+            <pane selection-relaxation-option="selection-relaxation-allow"/>
+          </panes>
+          <mark-layout/>
+          <rows/>
+          <cols/>
         </view>
       </table>
     </worksheet>
@@ -63,7 +101,21 @@
           <datasource-dependencies datasource="federated.0123456789abcdef">
             <column caption="Product_Category" datatype="string" name="[Product_Category]" role="dimension" type="nominal"/>
             <column caption="Revenue" datatype="real" name="[Revenue]" role="measure" type="quantitative"/>
+            <column-instance column="[Product_Category]" derivation="None" name="[none:Product_Category:nk]" pivot="key" type="nominal"/>
+            <column-instance column="[Revenue]" derivation="Sum" name="[sum:Revenue:qk]" pivot="key" type="quantitative"/>
           </datasource-dependencies>
+          <filter class="categorical" column="[federated.0123456789abcdef].[none:Product_Category:nk]"/>
+          <sort class="manual" column="[federated.0123456789abcdef].[none:Product_Category:nk]" direction="ASC"/>
+          <perspectives/>
+          <slices/>
+          <aggregation value="true"/>
+          <style/>
+          <panes>
+            <pane selection-relaxation-option="selection-relaxation-allow"/>
+          </panes>
+          <mark-layout/>
+          <rows/>
+          <cols/>
         </view>
       </table>
     </worksheet>
@@ -75,11 +127,28 @@
           </datasources>
           <datasource-dependencies datasource="federated.0123456789abcdef">
             <column caption="Region" datatype="string" name="[Region]" role="dimension" type="nominal"/>
+            <column-instance column="[Region]" derivation="None" name="[none:Region:nk]" pivot="key" type="nominal"/>
             <column caption="Product_Category" datatype="string" name="[Product_Category]" role="dimension" type="nominal"/>
+            <column-instance column="[Product_Category]" derivation="None" name="[none:Product_Category:nk]" pivot="key" type="nominal"/>
             <column caption="Revenue" datatype="real" name="[Revenue]" role="measure" type="quantitative"/>
+            <column-instance column="[Revenue]" derivation="Sum" name="[sum:Revenue:qk]" pivot="key" type="quantitative"/>
             <column caption="Units_Sold" datatype="integer" name="[Units_Sold]" role="measure" type="quantitative"/>
+            <column-instance column="[Units_Sold]" derivation="Sum" name="[sum:Units_Sold:qk]" pivot="key" type="quantitative"/>
             <column caption="Profit" datatype="real" name="[Profit]" role="measure" type="quantitative"/>
+            <column-instance column="[Profit]" derivation="Sum" name="[sum:Profit:qk]" pivot="key" type="quantitative"/>
           </datasource-dependencies>
+          <filter class="categorical" column="[federated.0123456789abcdef].[none:Region:nk]"/>
+          <sort class="manual" column="[federated.0123456789abcdef].[none:Region:nk]" direction="ASC"/>
+          <perspectives/>
+          <slices/>
+          <aggregation value="true"/>
+          <style/>
+          <panes>
+            <pane selection-relaxation-option="selection-relaxation-allow"/>
+          </panes>
+          <mark-layout/>
+          <rows/>
+          <cols/>
         </view>
       </table>
     </worksheet>
@@ -88,21 +157,37 @@
     <dashboard name="Main Dashboard">
       <size maxheight="800" maxwidth="1200" minheight="800" minwidth="1200"/>
       <zones>
-        <zone h="400" w="600" x="0" y="0" name="zone_0">
+        <zone h="400" w="600" x="0" y="0" id="7276e06f-b6be-46c4-87d4-56a751857d00">
           <zone-style/>
-          <zone-name name="Revenue by Region"/>
+          <flipboard active-id="0" auto-hide-nav="false">
+            <story-point id="0">
+              <worksheet name="Revenue by Region"/>
+            </story-point>
+          </flipboard>
         </zone>
-        <zone h="400" w="600" x="600" y="0" name="zone_1">
+        <zone h="400" w="600" x="600" y="0" id="d8329612-3fcb-49af-9730-290c4c6d4f1c">
           <zone-style/>
-          <zone-name name="Revenue Trend"/>
+          <flipboard active-id="0" auto-hide-nav="false">
+            <story-point id="0">
+              <worksheet name="Revenue Trend"/>
+            </story-point>
+          </flipboard>
         </zone>
-        <zone h="400" w="600" x="0" y="400" name="zone_2">
+        <zone h="400" w="600" x="0" y="400" id="c6bd9d4c-fbc2-483e-b97c-6b8639f2a5a1">
           <zone-style/>
-          <zone-name name="Product Performance"/>
+          <flipboard active-id="0" auto-hide-nav="false">
+            <story-point id="0">
+              <worksheet name="Product Performance"/>
+            </story-point>
+          </flipboard>
         </zone>
-        <zone h="400" w="600" x="600" y="400" name="zone_3">
+        <zone h="400" w="600" x="600" y="400" id="5463c1dc-9c0a-42c5-9146-b90c819134d1">
           <zone-style/>
-          <zone-name name="Sales Summary"/>
+          <flipboard active-id="0" auto-hide-nav="false">
+            <story-point id="0">
+              <worksheet name="Sales Summary"/>
+            </story-point>
+          </flipboard>
         </zone>
       </zones>
     </dashboard>
