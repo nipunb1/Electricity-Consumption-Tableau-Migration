@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<workbook xmlns:user="http://www.tableausoftware.com/xml/user" version="18.1">
+  <preferences/>
+  <datasources>
+    <datasource caption="ICG_2025" inline="true" name="federated.0123456789abcdef" version="18.1">
+      <connection class="excel-direct" cleaning="no" compat="no" dataRefreshTime="" filename="/home/ubuntu/ICG_2025.xlsx" interpretationMode="0" password="" server="" validate="no">
+        <relation connection="excel-direct" name="Data" table="[Data$]" type="table"/>
+      </connection>
+      <column caption="Date" datatype="date" name="[Date]" role="measure" type="quantitative"/>
+      <column caption="Region" datatype="string" name="[Region]" role="dimension" type="nominal"/>
+      <column caption="Product_Category" datatype="string" name="[Product_Category]" role="dimension" type="nominal"/>
+      <column caption="Sales_Channel" datatype="string" name="[Sales_Channel]" role="dimension" type="nominal"/>
+      <column caption="Customer_Segment" datatype="string" name="[Customer_Segment]" role="dimension" type="nominal"/>
+      <column caption="Revenue" datatype="real" name="[Revenue]" role="measure" type="quantitative"/>
+      <column caption="Units_Sold" datatype="integer" name="[Units_Sold]" role="measure" type="quantitative"/>
+      <column caption="Cost" datatype="real" name="[Cost]" role="measure" type="quantitative"/>
+      <column caption="Customer_ID" datatype="string" name="[Customer_ID]" role="dimension" type="nominal"/>
+      <column caption="Product_ID" datatype="string" name="[Product_ID]" role="dimension" type="nominal"/>
+      <column caption="Sales_Rep" datatype="string" name="[Sales_Rep]" role="dimension" type="nominal"/>
+      <column caption="Quarter" datatype="string" name="[Quarter]" role="dimension" type="nominal"/>
+      <column caption="Year" datatype="integer" name="[Year]" role="measure" type="quantitative"/>
+      <column caption="Discount_Percent" datatype="real" name="[Discount_Percent]" role="measure" type="quantitative"/>
+      <column caption="Profit_Margin" datatype="real" name="[Profit_Margin]" role="measure" type="quantitative"/>
+      <column caption="Profit" datatype="real" name="[Profit]" role="measure" type="quantitative"/>
+      <column caption="Unit_Price" datatype="real" name="[Unit_Price]" role="measure" type="quantitative"/>
+      <column caption="Discounted_Revenue" datatype="real" name="[Discounted_Revenue]" role="measure" type="quantitative"/>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name="Revenue by Region">
+      <table>
+        <view>
+          <datasources>
+            <datasource caption="ICG_2025" name="federated.0123456789abcdef"/>
+          </datasources>
+          <datasource-dependencies datasource="federated.0123456789abcdef">
+            <column caption="Region" datatype="string" name="[Region]" role="dimension" type="nominal"/>
+            <column caption="Revenue" datatype="real" name="[Revenue]" role="measure" type="quantitative"/>
+          </datasource-dependencies>
+          <aggregation value="true"/>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name="Revenue Trend">
+      <table>
+        <view>
+          <datasources>
+            <datasource caption="ICG_2025" name="federated.0123456789abcdef"/>
+          </datasources>
+          <datasource-dependencies datasource="federated.0123456789abcdef">
+            <column caption="Date" datatype="date" name="[Date]" role="dimension" type="ordinal"/>
+            <column caption="Revenue" datatype="real" name="[Revenue]" role="measure" type="quantitative"/>
+          </datasource-dependencies>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name="Product Performance">
+      <table>
+        <view>
+          <datasources>
+            <datasource caption="ICG_2025" name="federated.0123456789abcdef"/>
+          </datasources>
+          <datasource-dependencies datasource="federated.0123456789abcdef">
+            <column caption="Product_Category" datatype="string" name="[Product_Category]" role="dimension" type="nominal"/>
+            <column caption="Revenue" datatype="real" name="[Revenue]" role="measure" type="quantitative"/>
+          </datasource-dependencies>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name="Sales Summary">
+      <table>
+        <view>
+          <datasources>
+            <datasource caption="ICG_2025" name="federated.0123456789abcdef"/>
+          </datasources>
+          <datasource-dependencies datasource="federated.0123456789abcdef">
+            <column caption="Region" datatype="string" name="[Region]" role="dimension" type="nominal"/>
+            <column caption="Product_Category" datatype="string" name="[Product_Category]" role="dimension" type="nominal"/>
+            <column caption="Revenue" datatype="real" name="[Revenue]" role="measure" type="quantitative"/>
+            <column caption="Units_Sold" datatype="integer" name="[Units_Sold]" role="measure" type="quantitative"/>
+            <column caption="Profit" datatype="real" name="[Profit]" role="measure" type="quantitative"/>
+          </datasource-dependencies>
+        </view>
+      </table>
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard name="Main Dashboard">
+      <size maxheight="800" maxwidth="1200" minheight="800" minwidth="1200"/>
+      <zones>
+        <zone h="400" w="600" x="0" y="0" name="zone_0">
+          <zone-style/>
+          <zone-name name="Revenue by Region"/>
+        </zone>
+        <zone h="400" w="600" x="600" y="0" name="zone_1">
+          <zone-style/>
+          <zone-name name="Revenue Trend"/>
+        </zone>
+        <zone h="400" w="600" x="0" y="400" name="zone_2">
+          <zone-style/>
+          <zone-name name="Product Performance"/>
+        </zone>
+        <zone h="400" w="600" x="600" y="400" name="zone_3">
+          <zone-style/>
+          <zone-name name="Sales Summary"/>
+        </zone>
+      </zones>
+    </dashboard>
+  </dashboards>
+</workbook>
