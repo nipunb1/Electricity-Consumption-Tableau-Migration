@@ -154,6 +154,32 @@ class TableauWorkbookGenerator:
             'role': 'measure',
             'type': 'quantitative'
         })
+        
+        ET.SubElement(datasource_dependencies, 'column-instance', {
+            'column': '[Date]',
+            'derivation': 'None',
+            'name': '[none:Date:ok]',
+            'pivot': 'key',
+            'type': 'ordinal'
+        })
+        
+        ET.SubElement(datasource_dependencies, 'column-instance', {
+            'column': '[Revenue]',
+            'derivation': 'Sum',
+            'name': '[sum:Revenue:qk]',
+            'pivot': 'key',
+            'type': 'quantitative'
+        })
+        
+        filter_elem = ET.SubElement(view, 'filter', {'class': 'quantitative', 'column': '[federated.0123456789abcdef].[sum:Revenue:qk]'})
+        
+        sort_elem = ET.SubElement(view, 'sort', {'class': 'manual', 'column': '[federated.0123456789abcdef].[none:Date:ok]', 'direction': 'ASC'})
+        
+        perspectives = ET.SubElement(view, 'perspectives')
+        
+        slices = ET.SubElement(view, 'slices')
+        
+        aggregation = ET.SubElement(view, 'aggregation', {'value': 'true'})
     
     def _add_pie_chart_config(self, view):
         """Add pie chart configuration"""
@@ -174,6 +200,32 @@ class TableauWorkbookGenerator:
             'role': 'measure',
             'type': 'quantitative'
         })
+        
+        ET.SubElement(datasource_dependencies, 'column-instance', {
+            'column': '[Product_Category]',
+            'derivation': 'None',
+            'name': '[none:Product_Category:nk]',
+            'pivot': 'key',
+            'type': 'nominal'
+        })
+        
+        ET.SubElement(datasource_dependencies, 'column-instance', {
+            'column': '[Revenue]',
+            'derivation': 'Sum',
+            'name': '[sum:Revenue:qk]',
+            'pivot': 'key',
+            'type': 'quantitative'
+        })
+        
+        filter_elem = ET.SubElement(view, 'filter', {'class': 'categorical', 'column': '[federated.0123456789abcdef].[none:Product_Category:nk]'})
+        
+        sort_elem = ET.SubElement(view, 'sort', {'class': 'manual', 'column': '[federated.0123456789abcdef].[none:Product_Category:nk]', 'direction': 'ASC'})
+        
+        perspectives = ET.SubElement(view, 'perspectives')
+        
+        slices = ET.SubElement(view, 'slices')
+        
+        aggregation = ET.SubElement(view, 'aggregation', {'value': 'true'})
     
     def _add_table_config(self, view):
         """Add table configuration"""
